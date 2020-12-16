@@ -1,53 +1,169 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:magic="clr-namespace:MagicGradients;assembly=MagicGradients"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:magic="clr-namespace:MagicGradients;assembly=MagicGradients"
              x:Class="BudgetManager.MainPage">
 
     <Grid>
         <magic:GradientView>
-            <magic:LinearGradient Angle="180">
-                <magic:GradientStop Color="#2c2a6e" Offset="1" />
+            <magic:LinearGradient Angle="0">
+                <magic:GradientStop Color="#dbf3f6" Offset="1" />
                 <magic:GradientStop Color="#098199" Offset="0"/>
             </magic:LinearGradient>
         </magic:GradientView>
         <StackLayout>
-            <StackLayout>
-                <Label HorizontalTextAlignment="Center">STRONA GŁOWNA</Label>
+        <StackLayout VerticalOptions="Start"
+                     Margin="10,10,10,0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Frame CornerRadius="20"
+                           Padding="0"
+                           Grid.Column="0">
+                    <Button x:Name="expenseBtn"
+                            Text="Wydatki"
+                            Clicked="expenseBtn_Clicked"/>
+                </Frame>
+                <Frame CornerRadius="20"
+                           Padding="0"
+                           Grid.Column="1">
+                    <Button x:Name="incomeBtn"
+                            Text="Przychody"
+                            Clicked="incomeBtn_Clicked"/>
+                </Frame>
+            </Grid>
+                <Label HorizontalTextAlignment="Center"
+                   FontSize="Large"
+                   x:Name="summaryLabel"/>
             </StackLayout>
-            <StackLayout VerticalOptions="EndAndExpand">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Frame CornerRadius="20"
+        <StackLayout x:Name="expenseLayout"
+                     Margin="10">
+            <ListView x:Name ="expenseListView"
+                      SeparatorColor="White"
+                      RowHeight="100">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackLayout Grid.Column="0">
+                                    <Label>
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding kwota, StringFormat='{0:N} PLN'}"
+                                                      TextColor="#4a4a4a"
+                                                      FontSize="Medium"/>
+                                                <Span Text="    "/>
+                                                <Span Text="{Binding kategoria}"
+                                                      FontSize="Micro"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label Text="{Binding data}"
+                                           TextColor="#4a4a4a"
+                                           FontSize="Small"/>
+                                    <Label Text="{Binding opis}"/>
+                                </StackLayout>
+                                <ImageButton x:Name="deleteBtn"
+                                             ClassId="{Binding id}"
+                                             Margin="0,0,20,0"
+                                            HorizontalOptions="End"
+                                            VerticalOptions="Center"
+                                            Source="crossmark.png"
+                                            HeightRequest="30"
+                                            Clicked="deleteBtn_Clicked"
+                                            Grid.Column="1"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+        <StackLayout x:Name="incomeLayout"
+                     Margin="10">
+            <ListView x:Name ="incomeListView"
+                      SeparatorColor="White"
+                      RowHeight="100">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>                                
+                                <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackLayout Grid.Column="0">
+                                        <Label>
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding kwota, StringFormat='{0:N} PLN'}"
+                                                      TextColor="#4a4a4a"
+                                                      FontSize="Medium"/>
+                                                <Span Text="    "/>
+                                                <Span Text="{Binding kategoria}"
+                                                      FontSize="Micro"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label Text="{Binding data}"
+                                           TextColor="#4a4a4a"
+                                           FontSize="Small"/>
+                                    <Label Text="{Binding opis}"/>
+                                </StackLayout>
+                                <ImageButton x:Name="deleteBtn"
+                                             ClassId="{Binding id}"
+                                             Margin="0,0,20,0"
+                                            HorizontalOptions="End"
+                                            VerticalOptions="Center"
+                                            Source="crossmark.png"
+                                            HeightRequest="30"
+                                            Clicked="deleteBtn_Clicked"
+                                            Grid.Column="1"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+        </StackLayout>
+
+        <StackLayout VerticalOptions="EndAndExpand">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Frame CornerRadius="20"
                        Padding="0"
                        Grid.Column="0">
-                        <StackLayout BackgroundColor="#0594a8">
-                            <ImageButton x:Name="mainPageBtn"
+                    <StackLayout BackgroundColor="#0594a8">
+                        <ImageButton x:Name="mainPageBtn"
                                  Source="homeBTNNoText.png"
-                                 Clicked="mainPageBtn_Clicked"
                                  HeightRequest="50"
                                  BackgroundColor="Transparent"/>
-                        </StackLayout>
-                    </Frame>
-                    <StackLayout Grid.Column="1">
-                        <ImageButton x:Name="addBtn"
+                    </StackLayout>
+                </Frame>
+                <StackLayout Grid.Column="1">
+                    <ImageButton x:Name="addBtn"
                                  Source="addbtnNoText.png"
                                  HeightRequest="50"
                                  Clicked="addBtn_Clicked"
                                  BackgroundColor="Transparent"/>
-                    </StackLayout>
-                    <StackLayout Grid.Column="2">
-                        <ImageButton x:Name="editBtn"
+                </StackLayout>
+                <StackLayout Grid.Column="2">
+                    <ImageButton x:Name="editBtn"
                                  Source="EditBTNNoText.png"
                                  HeightRequest="50"
                                  Clicked="editBtn_Clicked"
                                  BackgroundColor="Transparent"/>
-                    </StackLayout>
-                </Grid>
-            </StackLayout>
+                </StackLayout>
+            </Grid>
         </StackLayout>
     </Grid>
 </ContentPage>

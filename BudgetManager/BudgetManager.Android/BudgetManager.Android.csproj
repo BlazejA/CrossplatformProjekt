@@ -125,6 +125,9 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\EditBTNNoText.png" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\crossmark.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>

@@ -18,21 +18,16 @@ namespace BudgetManager.Pages
         {
             InitializeComponent();
         }
-        //Nawigacja
         private async void mainPageBtn_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushModalAsync(new MainPage());
-        }
-
-        private async void addBtn_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushModalAsync(new addPage());
         }
 
         private async void editBtn_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushModalAsync(new EditPage());
         }
+
 
         private void wydatekBtn_Clicked(object sender, EventArgs e)
         {
@@ -42,7 +37,8 @@ namespace BudgetManager.Pages
                 Wydatek newExpense = new Wydatek(double.Parse(moneyAmountEntry.Text),
                                                 pickCategory.SelectedItem.ToString(),
                                                 descriptionEntry.Text,
-                                                datePicker.Date);
+                                                datePicker.Date,
+                                                "WYDATEK");
                 dataBase.Insert(newExpense);
                 infoLabel.Text = "Dodano wydatek!";
                 moneyAmountEntry.Text = "";
@@ -66,6 +62,23 @@ namespace BudgetManager.Pages
                 }
                 DisplayAlert("Błędne dane", "Kwota musi być liczbą!", "Ok");
                 return false;
+            }
+        }
+
+        private void przychodBtn_Clicked(object sender, EventArgs e)
+        {
+            dataBase.CreateTable<Wydatek>();
+            if (checkIfDataIsCorrect(moneyAmountEntry.Text, pickCategory.SelectedItem))
+            {
+                Wydatek newExpense = new Wydatek(double.Parse(moneyAmountEntry.Text),
+                                                pickCategory.SelectedItem.ToString(),
+                                                descriptionEntry.Text,
+                                                datePicker.Date,
+                                                "PRZYCHOD");
+                dataBase.Insert(newExpense);
+                infoLabel.Text = "Dodano przychód!";
+                moneyAmountEntry.Text = "";
+                descriptionEntry.Text = "";
             }
         }
     }

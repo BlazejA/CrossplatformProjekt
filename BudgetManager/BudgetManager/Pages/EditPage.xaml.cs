@@ -25,10 +25,5 @@ namespace BudgetManager.Pages
         {
             await Navigation.PushModalAsync(new Pages.addPage());
         }
-
-        private async void editBtn_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushModalAsync(new Pages.EditPage());
-        }
     }
 }

@@ -5,8 +5,8 @@
              x:Class="BudgetManager.Pages.EditPage">
     <Grid>
         <magic:GradientView>
-            <magic:LinearGradient Angle="180">
-                <magic:GradientStop Color="#2c2a6e" Offset="1" />
+            <magic:LinearGradient Angle="0">
+                <magic:GradientStop Color="#dbf3f6" Offset="1" />
                 <magic:GradientStop Color="#098199" Offset="0"/>
             </magic:LinearGradient>
         </magic:GradientView>
@@ -44,7 +44,6 @@
                             <ImageButton x:Name="editBtn"
                                  Source="EditBTNNoText.png"
                                  HeightRequest="50"
-                                 Clicked="editBtn_Clicked"
                                  BackgroundColor="Transparent"/>
                         </StackLayout>
                     </Frame>

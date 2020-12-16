@@ -2,18 +2,21 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:magic="clr-namespace:MagicGradients;assembly=MagicGradients"
              x:Class="BudgetManager.Pages.addPage">
-
+  
     <Grid>
         <magic:GradientView>
-            <magic:LinearGradient Angle="180">
-                <magic:GradientStop Color="White" Offset="1" />
+            <magic:LinearGradient Angle="0">
+                <magic:GradientStop Color="#dbf3f6" Offset="1" />
                 <magic:GradientStop Color="#098199" Offset="0"/>
             </magic:LinearGradient>
         </magic:GradientView>
     <StackLayout>
         <StackLayout Margin="50">
             <Label HorizontalTextAlignment="Start" Text="Kwota:"/>
-            <Entry x:Name="moneyAmountEntry" Placeholder="Wpisz kwotę" />
+            <Entry x:Name="moneyAmountEntry"
+                   Placeholder="Wpisz kwotę"
+                   Keyboard="Numeric"
+                   ClearButtonVisibility="WhileEditing"/>
             <Label HorizontalTextAlignment="Start">Kategoria:</Label>
             <Picker x:Name="pickCategory"
                     Title="Wybierz kategorię">
@@ -26,7 +29,9 @@
             <Label HorizontalTextAlignment="Start">Data:</Label>
             <DatePicker x:Name="datePicker"/>
             <Label HorizontalTextAlignment="Start">Opis:</Label>
-            <Entry x:Name="descriptionEntry" Placeholder="Wpisz opis"/>            
+            <Entry x:Name="descriptionEntry"
+                   Placeholder="Wpisz opis"
+                   ClearButtonVisibility="WhileEditing"/>            
         </StackLayout>            
             <StackLayout HorizontalOptions="EndAndExpand" >
             <Grid>
@@ -44,15 +49,21 @@
                         Padding="0"
                         Clicked="wydatekBtn_Clicked"/>
                 <Button Grid.Column="1"
+                        x:Name="przychodBtn"
                         Text="Dodaj wpływ"
                         TextColor="White"
                         BackgroundColor="#006600"
                         CornerRadius="10"
                         Margin="30"
-                        Padding="0"/>
+                        Padding="0"
+                        Clicked="przychodBtn_Clicked"/>
             </Grid>
         </StackLayout>
-            <Label x:Name="infoLabel" Text="" HorizontalTextAlignment="Center" FontSize="Large"/>
+            <Label x:Name="infoLabel"
+                   Text=""
+                   HorizontalTextAlignment="Center"
+                   FontSize="Large"
+                   TextColor="Gray"/>
             <StackLayout VerticalOptions="EndAndExpand">
              <Grid>
                 <Grid.ColumnDefinitions>
@@ -75,7 +86,6 @@
                             <ImageButton x:Name="addBtn"
                                  Source="addbtnNoText.png"
                                  HeightRequest="50"
-                                 Clicked="addBtn_Clicked"
                                  BackgroundColor="Transparent"/>
                     </StackLayout>
                 </Frame>
