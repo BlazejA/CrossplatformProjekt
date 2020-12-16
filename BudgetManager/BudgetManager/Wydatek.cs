@@ -9,20 +9,19 @@ namespace BudgetManager
         public int id { get; set; }
         
         [NotNull]
-        public int kwota { get; set; }
+        public double kwota { get; set; }
 
         [NotNull]
         public string kategoria { get; set; }
-
-        [NotNull]
         public string opis { get; set; }
 
+        [NotNull]
         public DateTime data { get; set; }
 
         public Wydatek()
         {
         }
-        public Wydatek(int kwota, string kategoria, string opis, DateTime data)
+        public Wydatek(double kwota, string kategoria, string opis, DateTime data)
         {
             this.kwota = kwota;
             this.kategoria = kategoria;

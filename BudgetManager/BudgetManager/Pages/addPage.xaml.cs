@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SQLite;
+using System;
+using System.Collections;
+using System.Diagnostics;
+using System.IO;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -12,11 +12,13 @@ namespace BudgetManager.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class addPage : ContentPage
     {
+
+        SQLiteConnection dataBase = new SQLiteConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Wydatek.cs"));
         public addPage()
         {
             InitializeComponent();
         }
-
+        //Nawigacja
         private async void mainPageBtn_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushModalAsync(new MainPage());
@@ -30,6 +32,41 @@ namespace BudgetManager.Pages
         private async void editBtn_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushModalAsync(new EditPage());
+        }
+
+        private void wydatekBtn_Clicked(object sender, EventArgs e)
+        {
+            dataBase.CreateTable<Wydatek>();
+            if (checkIfDataIsCorrect(moneyAmountEntry.Text, pickCategory.SelectedItem))
+            {
+                Wydatek newExpense = new Wydatek(double.Parse(moneyAmountEntry.Text),
+                                                pickCategory.SelectedItem.ToString(),
+                                                descriptionEntry.Text,
+                                                datePicker.Date);
+                dataBase.Insert(newExpense);
+                infoLabel.Text = "Dodano wydatek!";
+                moneyAmountEntry.Text = "";
+                descriptionEntry.Text = "";
+            }
+
+        }
+
+        private bool checkIfDataIsCorrect(string moneyAmount, object pickedCategory)
+        {
+            if (moneyAmount == null || pickedCategory == null)
+            {
+                DisplayAlert("Błędne dane", "Uzupełnij wszytkie wymagane dane!", "Ok");
+                return false;
+            }
+            else
+            {
+                if (double.TryParse(moneyAmount, out double a))
+                {
+                    return true;
+                }
+                DisplayAlert("Błędne dane", "Kwota musi być liczbą!", "Ok");
+                return false;
+            }
         }
     }
 }

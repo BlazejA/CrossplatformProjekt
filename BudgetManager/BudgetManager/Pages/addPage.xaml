@@ -6,14 +6,14 @@
     <Grid>
         <magic:GradientView>
             <magic:LinearGradient Angle="180">
-                <magic:GradientStop Color="#2c2a6e" Offset="1" />
+                <magic:GradientStop Color="White" Offset="1" />
                 <magic:GradientStop Color="#098199" Offset="0"/>
             </magic:LinearGradient>
         </magic:GradientView>
     <StackLayout>
         <StackLayout Margin="50">
-            <Label HorizontalTextAlignment="Start">Kwota:</Label>
-            <Entry x:Name="moneyAmountEntry" Placeholder="Wpisz kwotę"/>
+            <Label HorizontalTextAlignment="Start" Text="Kwota:"/>
+            <Entry x:Name="moneyAmountEntry" Placeholder="Wpisz kwotę" />
             <Label HorizontalTextAlignment="Start">Kategoria:</Label>
             <Picker x:Name="pickCategory"
                     Title="Wybierz kategorię">
@@ -27,20 +27,22 @@
             <DatePicker x:Name="datePicker"/>
             <Label HorizontalTextAlignment="Start">Opis:</Label>
             <Entry x:Name="descriptionEntry" Placeholder="Wpisz opis"/>            
-        </StackLayout>
-        <StackLayout HorizontalOptions="EndAndExpand">
+        </StackLayout>            
+            <StackLayout HorizontalOptions="EndAndExpand" >
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Button Grid.Column="0"
+                        x:Name="wydatekBtn"
                         Text="Dodaj wydatek"
                         BackgroundColor="#993300"
                         TextColor="White"
                         CornerRadius="10"
                         Margin="30"
-                        Padding="0"/>
+                        Padding="0"
+                        Clicked="wydatekBtn_Clicked"/>
                 <Button Grid.Column="1"
                         Text="Dodaj wpływ"
                         TextColor="White"
@@ -50,7 +52,8 @@
                         Padding="0"/>
             </Grid>
         </StackLayout>
-        <StackLayout VerticalOptions="EndAndExpand">
+            <Label x:Name="infoLabel" Text="" HorizontalTextAlignment="Center" FontSize="Large"/>
+            <StackLayout VerticalOptions="EndAndExpand">
              <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
