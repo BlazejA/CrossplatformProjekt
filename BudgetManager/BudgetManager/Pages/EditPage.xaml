@@ -1,42 +1,55 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:magic="clr-namespace:MagicGradients;assembly=MagicGradients"
              x:Class="BudgetManager.Pages.EditPage">
-    <StackLayout>
+    <Grid>
+        <magic:GradientView>
+            <magic:LinearGradient Angle="180">
+                <magic:GradientStop Color="#2c2a6e" Offset="1" />
+                <magic:GradientStop Color="#098199" Offset="0"/>
+            </magic:LinearGradient>
+        </magic:GradientView>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
+            <StackLayout>
+                <Label Text="Welcome to Xamarin.Forms!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-        <StackLayout VerticalOptions="EndAndExpand">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <StackLayout Grid.Column="0">
-                    <ImageButton x:Name="mainPageBtn"
-                                 Source="addbtnNoText.png"
+            </StackLayout>
+            <StackLayout VerticalOptions="EndAndExpand">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <StackLayout Grid.Column="0">
+                        <ImageButton x:Name="mainPageBtn"
+                                 Source="homeBTNNoText.png"
                                  Clicked="mainPageBtn_Clicked"
                                  HeightRequest="50"
                                  BackgroundColor="Transparent"/>
-                </StackLayout>
-                <StackLayout Grid.Column="1">
-                    <ImageButton x:Name="addBtn"
-                                 Source="EditBTNNoText.png"
+                    </StackLayout>
+                    <StackLayout Grid.Column="1">
+                        <ImageButton x:Name="addBtn"
+                                 Source="addbtnNoText.png"
                                  HeightRequest="50"
                                  Clicked="addBtn_Clicked"
                                  BackgroundColor="Transparent"/>
-                </StackLayout>
-                <StackLayout Grid.Column="2">
-                    <ImageButton x:Name="editBtn"
-                                 Source="homeBTNNoText.png"
+                    </StackLayout>
+                    <Frame CornerRadius="20"
+                       Padding="0"
+                       Grid.Column="2">
+                        <StackLayout BackgroundColor="#0594a8">
+                            <ImageButton x:Name="editBtn"
+                                 Source="EditBTNNoText.png"
                                  HeightRequest="50"
                                  Clicked="editBtn_Clicked"
                                  BackgroundColor="Transparent"/>
-                </StackLayout>
-            </Grid>
+                        </StackLayout>
+                    </Frame>
+                </Grid>
+            </StackLayout>
         </StackLayout>
-    </StackLayout>
+    </Grid>
 </ContentPage>

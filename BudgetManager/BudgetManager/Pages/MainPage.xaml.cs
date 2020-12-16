@@ -15,6 +15,11 @@ namespace BudgetManager
             InitializeComponent();
         }
 
+
+
+
+
+        //Nawigacja
         private async void mainPageBtn_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushModalAsync(new MainPage());

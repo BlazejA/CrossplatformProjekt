@@ -1,41 +1,91 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:magic="clr-namespace:MagicGradients;assembly=MagicGradients"
              x:Class="BudgetManager.Pages.addPage">
 
+    <Grid>
+        <magic:GradientView>
+            <magic:LinearGradient Angle="180">
+                <magic:GradientStop Color="#2c2a6e" Offset="1" />
+                <magic:GradientStop Color="#098199" Offset="0"/>
+            </magic:LinearGradient>
+        </magic:GradientView>
     <StackLayout>
-        <StackLayout>
-            <Label HorizontalTextAlignment="Center">ADD PAGE</Label>
+        <StackLayout Margin="50">
+            <Label HorizontalTextAlignment="Start">Kwota:</Label>
+            <Entry x:Name="moneyAmountEntry" Placeholder="Wpisz kwotę"/>
+            <Label HorizontalTextAlignment="Start">Kategoria:</Label>
+            <Picker x:Name="pickCategory"
+                    Title="Wybierz kategorię">
+                <Picker.Items>                    
+                    <x:String>Hobby</x:String>
+                    <x:String>Jedzenie</x:String>
+                    <x:String>Inne</x:String>
+                </Picker.Items>
+            </Picker>
+            <Label HorizontalTextAlignment="Start">Data:</Label>
+            <DatePicker x:Name="datePicker"/>
+            <Label HorizontalTextAlignment="Start">Opis:</Label>
+            <Entry x:Name="descriptionEntry" Placeholder="Wpisz opis"/>            
+        </StackLayout>
+        <StackLayout HorizontalOptions="EndAndExpand">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0"
+                        Text="Dodaj wydatek"
+                        BackgroundColor="#993300"
+                        TextColor="White"
+                        CornerRadius="10"
+                        Margin="30"
+                        Padding="0"/>
+                <Button Grid.Column="1"
+                        Text="Dodaj wpływ"
+                        TextColor="White"
+                        BackgroundColor="#006600"
+                        CornerRadius="10"
+                        Margin="30"
+                        Padding="0"/>
+            </Grid>
         </StackLayout>
         <StackLayout VerticalOptions="EndAndExpand">
-            <Grid>
+             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
+                </Grid.ColumnDefinitions>                 
                 <StackLayout Grid.Column="0">
                     <ImageButton x:Name="mainPageBtn"
-                                 Source="addbtnNoText.png"
+                                 Source="homeBTNNoText.png"
                                  Clicked="mainPageBtn_Clicked"
                                  HeightRequest="50"
                                  BackgroundColor="Transparent"/>
                 </StackLayout>
-                <StackLayout Grid.Column="1">
-                    <ImageButton x:Name="addBtn"
-                                 Source="EditBTNNoText.png"
+                <Frame CornerRadius="20"
+                       Padding="0"
+                       Grid.Column="1">
+                    <StackLayout BackgroundColor="#0594a8"
+                                     Routing.Route="10">
+                            <ImageButton x:Name="addBtn"
+                                 Source="addbtnNoText.png"
                                  HeightRequest="50"
                                  Clicked="addBtn_Clicked"
                                  BackgroundColor="Transparent"/>
-                </StackLayout>
+                    </StackLayout>
+                </Frame>
                 <StackLayout Grid.Column="2">
-                    <ImageButton x:Name="editBtn"
-                                 Source="homeBTNNoText.png"
+                            <ImageButton x:Name="editBtn"
+                                 Source="EditBTNNoText.png"
                                  HeightRequest="50"
                                  Clicked="editBtn_Clicked"
                                  BackgroundColor="Transparent"/>
-                </StackLayout>
-            </Grid>
+                        </StackLayout>
+                    </Grid>
         </StackLayout>
+        
     </StackLayout>
+    </Grid>
 </ContentPage>
