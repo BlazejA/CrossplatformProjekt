@@ -31,6 +31,7 @@ namespace BudgetManager.Pages
 
         private void wydatekBtn_Clicked(object sender, EventArgs e)
         {
+            dataBase.DropTable<Wydatek>();
             dataBase.CreateTable<Wydatek>();
             if (checkIfDataIsCorrect(moneyAmountEntry.Text, pickCategory.SelectedItem))
             {
