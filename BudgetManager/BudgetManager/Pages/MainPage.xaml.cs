@@ -15,64 +15,85 @@ namespace BudgetManager
     {
 
         List<Wydatek> expenseList = new List<Wydatek>();
-        List<Wydatek> incomeList = new List<Wydatek>();
-        SQLiteConnection dataBase = new SQLiteConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Wydatek.cs"));
+        List<Przychod> incomeList = new List<Przychod>();
+        SQLiteConnection wydatekBase = new SQLiteConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                                                                        "Wydatek.cs"));
+        SQLiteConnection przychodBase = new SQLiteConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                                                                         "Przychod.cs"));
         public MainPage()
         {
             InitializeComponent();            
             incomeLayout.IsVisible = false;
-            showBudget();            
+            przychodBase.CreateTable<Przychod>();
+            wydatekBase.CreateTable<Wydatek>();
+            showBudget();
+            
         }
 
         private void separateObjects()
         {
             expenseList.Clear();
             incomeList.Clear();
-            var table = dataBase.Table<Wydatek>();
-            foreach (Wydatek w in table)
-            {
-                if (w.rodzaj == "WYDATEK")
-                    expenseList.Add(w);
-                else
-                    incomeList.Add(w);
-            }
+            var expenseTable = wydatekBase.Table<Wydatek>();
+            foreach (Wydatek w in expenseTable)            
+                expenseList.Add(w);
+
+            var incomeTable = przychodBase.Table<Przychod>();
+            foreach (Przychod p in incomeTable)
+                incomeList.Add(p);
         }
         private void showBudget()
         {
-            separateObjects();
             if (expenseLayout.IsVisible) 
-                expenseListView.ItemsSource = expenseList;
+                expenseListView.ItemsSource = wydatekBase.Table<Wydatek>().ToList();
             else
-                incomeListView.ItemsSource = incomeList;
+                incomeListView.ItemsSource = przychodBase.Table<Przychod>().ToList();
             sumMoney();
+        }
+        private double sumExpense()
+        {
+            double sum = 0;
+            for (int i = 0; i < expenseList.Count; i++)
+            {
+                sum += expenseList[i].kwota;
+            }
+            summaryLabel.Text = "Twoje wydatki: " + sum.ToString() + "PLN";
+            summaryLabel.TextColor = Color.FromHex("#993300");
+            return sum;
+        }
+        private double sumIncome()
+        {
+            double sum = 0;
+            for (int i = 0; i < incomeList.Count; i++)
+            {
+                sum += incomeList[i].kwota;
+            }
+            summaryLabel.Text = "Twoje przychody: " + sum.ToString() + "PLN";
+            summaryLabel.TextColor = Color.FromHex("#006600");
+            return sum;
         }
         private void sumMoney()
         {
-            double sum = 0;
+            separateObjects();            
             if (expenseLayout.IsVisible)
             {
-                for (int i = 0; i < expenseList.Count; i++)
-                {
-                    sum += expenseList[i].kwota;
-                }
-                summaryLabel.Text = "Twoje wydatki: " + sum.ToString() + "PLN";
-                summaryLabel.TextColor = Color.FromHex("#993300");
+                sumExpense();
             }
             else
             {
-                for (int i = 0; i < incomeList.Count; i++)
-                {
-                    sum += incomeList[i].kwota;
-                }
-                summaryLabel.Text = "Twoje przychody: " + sum.ToString() + "PLN";
-                summaryLabel.TextColor = Color.FromHex("#006600");
+                sumIncome();
             }
+            double bilans = sumExpense() - sumIncome();
+            bilansLabel.Text = "Bilans: " + bilans;
         }
         private void deleteBtn_Clicked(object sender, EventArgs e)
         {
             ImageButton button = (ImageButton)sender;
             string id = button.ClassId;
-            dataBase.Delete<Wydatek>(id);
+            if (expenseLayout.IsVisible)
+                wydatekBase.Delete<Wydatek>(id);
+            else
+                przychodBase.Delete<Przychod>(id);
             showBudget();
         }
         

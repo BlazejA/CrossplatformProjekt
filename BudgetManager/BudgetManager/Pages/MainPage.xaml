@@ -11,40 +11,51 @@
                 <magic:GradientStop Color="#098199" Offset="0"/>
             </magic:LinearGradient>
         </magic:GradientView>
-        
-        <StackLayout>
-            <StackLayout VerticalOptions="Start"
-                         Margin="10,10,10,0">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Frame CornerRadius="20"
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="5*"/>
+            </Grid.RowDefinitions>
+
+            <StackLayout VerticalOptions="StartAndExpand"
+                     Margin="10"
+                         Grid.Row="0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Frame CornerRadius="20"
                                Padding="0"
                                Grid.Column="0">
-                        <Button x:Name="expenseBtn"
+                    <Button x:Name="expenseBtn"
                                 Text="Wydatki"
                                 VerticalOptions="Fill"
                                 HorizontalOptions="Fill"
                                 BackgroundColor="#06677a"
                                 Clicked="expenseBtn_Clicked"/>
-                    </Frame>
-                    <Frame CornerRadius="20"
+                </Frame>
+                <Frame CornerRadius="20"
                                Padding="0"
                                Grid.Column="1">
-                        <Button x:Name="incomeBtn"
+                    <Button x:Name="incomeBtn"
                                 VerticalOptions="Fill"
                                 HorizontalOptions="Fill"
                                 Text="Przychody"                            
                                 BackgroundColor="#06677a"
                                 Clicked="incomeBtn_Clicked"/>
-                    </Frame>
-                </Grid>
-                    <Label HorizontalTextAlignment="Center"
+                </Frame>
+            </Grid>
+            <Label HorizontalTextAlignment="Center"
                        FontSize="Large"
                        x:Name="summaryLabel"/>
+                <Label HorizontalTextAlignment="Center"
+                       FontSize="Micro"
+                       x:Name="bilansLabel"/>
             </StackLayout>
+
+            <StackLayout Grid.Row="1">            
             <StackLayout x:Name="expenseLayout"
                          Margin="10">
                 <ListView x:Name ="expenseListView"
@@ -98,7 +109,8 @@
                 <ListView x:Name ="incomeListView"
                           SeparatorColor="White"
                           RowHeight="100"
-                          IsPullToRefreshEnabled="true">
+                          IsPullToRefreshEnabled="true"
+                          >
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -143,6 +155,8 @@
             </StackLayout>
         </StackLayout>
 
+        </Grid>    
+            
         <StackLayout VerticalOptions="EndAndExpand">
             <Grid>
                 <Grid.ColumnDefinitions>

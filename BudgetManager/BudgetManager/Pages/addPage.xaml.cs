@@ -13,16 +13,17 @@ namespace BudgetManager.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class addPage : ContentPage
     {
-        SQLiteConnection dataBase = new SQLiteConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+        SQLiteConnection wydatekBase = new SQLiteConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
                                                          "Wydatek.cs"));
+        SQLiteConnection przychodBase = new SQLiteConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                                                         "Przychod.cs"));
         SQLiteConnection categoriesBase = new SQLiteConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
                                                          "Category.cs"));
 
 
         public addPage()
         {
-            InitializeComponent();
-            
+            InitializeComponent();            
             pickCategory.ItemsSource = categoriesList();            
         }
 
@@ -41,28 +42,17 @@ namespace BudgetManager.Pages
             }
             return list;
         }
-        private async void mainPageBtn_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushModalAsync(new MainPage());
-        }
-
-        private async void editBtn_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushModalAsync(new EditPage());
-        }
-
-
+        
         private void wydatekBtn_Clicked(object sender, EventArgs e)
         {
-            dataBase.CreateTable<Wydatek>();
+            wydatekBase.CreateTable<Wydatek>();
             if (checkIfDataIsCorrect(moneyAmountEntry.Text, pickCategory.SelectedItem))
             {
                 Wydatek newExpense = new Wydatek(double.Parse(moneyAmountEntry.Text),
                                                 pickCategory.SelectedItem.ToString(),
                                                 descriptionEntry.Text,
-                                                datePicker.Date,
-                                                "WYDATEK");
-                dataBase.Insert(newExpense);
+                                                datePicker.Date);
+                wydatekBase.Insert(newExpense);
                 infoLabel.Text = "Dodano wydatek!";
                 moneyAmountEntry.Text = "";
                 descriptionEntry.Text = "";
@@ -90,19 +80,27 @@ namespace BudgetManager.Pages
 
         private void przychodBtn_Clicked(object sender, EventArgs e)
         {
-            dataBase.CreateTable<Wydatek>();
+            przychodBase.CreateTable<Przychod>();
             if (checkIfDataIsCorrect(moneyAmountEntry.Text, pickCategory.SelectedItem))
             {
-                Wydatek newExpense = new Wydatek(double.Parse(moneyAmountEntry.Text),
+                Przychod newIncome = new Przychod(double.Parse(moneyAmountEntry.Text),
                                                 pickCategory.SelectedItem.ToString(),
                                                 descriptionEntry.Text,
-                                                datePicker.Date,
-                                                "PRZYCHOD");
-                dataBase.Insert(newExpense);
+                                                datePicker.Date);
+                przychodBase.Insert(newIncome);
                 infoLabel.Text = "Dodano przychód!";
                 moneyAmountEntry.Text = "";
                 descriptionEntry.Text = "";
             }
+        }
+
+        private async void mainPageBtn_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushModalAsync(new MainPage());
+        }
+        private async void editBtn_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushModalAsync(new EditPage());
         }
     }
 }

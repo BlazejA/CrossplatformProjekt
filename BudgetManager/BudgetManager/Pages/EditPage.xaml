@@ -10,9 +10,9 @@
                 <magic:GradientStop Color="#098199" Offset="0"/>
             </magic:LinearGradient>
         </magic:GradientView>
-        
-    <StackLayout>
-         <StackLayout Margin="50">
+
+        <StackLayout>
+            <StackLayout Margin="30,0,30,0">
                 <Label Text="Dodaj kategorię:"
                        VerticalOptions="CenterAndExpand" 
                        HorizontalOptions="StartAndExpand"/>
@@ -24,9 +24,15 @@
                        VerticalOptions="CenterAndExpand" 
                        HorizontalOptions="StartAndExpand"
                        FontSize="Micro"
-                       TextColor="LightGray"/>
+                       TextColor="LightGray"/>                
             </StackLayout>
-         <StackLayout Margin="50,0,50,0">
+
+            <StackLayout Margin="30,0,30,0"                      
+                         VerticalOptions="StartAndExpand"
+                         Grid.Row="1">
+                <Label Text="Lista kategorii"
+                       TextColor="LightGray"
+                       FontSize="Small"/>
                 <ListView x:Name="categoriesListview"
                           RowHeight="30"
                           ItemSelected="categoriesListview_ItemSelected"
@@ -39,40 +45,41 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-            </StackLayout>                        
-         <StackLayout VerticalOptions="EndAndExpand">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <StackLayout Grid.Column="0">
-                        <ImageButton x:Name="mainPageBtn"
+            </StackLayout> 
+        </StackLayout>h
+        
+     <StackLayout VerticalOptions="EndAndExpand">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <StackLayout Grid.Column="0">
+                    <ImageButton x:Name="mainPageBtn"
                                  Source="homeBTNNoText.png"
                                  Clicked="mainPageBtn_Clicked"
                                  HeightRequest="50"
                                  BackgroundColor="Transparent"/>
-                    </StackLayout>
-                    <StackLayout Grid.Column="1">
-                        <ImageButton x:Name="addBtn"
+                </StackLayout>
+                <StackLayout Grid.Column="1">
+                    <ImageButton x:Name="addBtn"
                                  Source="addbtnNoText.png"
                                  HeightRequest="50"
                                  Clicked="addBtn_Clicked"
                                  BackgroundColor="Transparent"/>
-                    </StackLayout>
-                    <Frame CornerRadius="20"
+                </StackLayout>
+                <Frame CornerRadius="20"
                        Padding="0"
                        Grid.Column="2">
-                        <StackLayout BackgroundColor="#0594a8">
-                            <ImageButton x:Name="editBtn"
+                    <StackLayout BackgroundColor="#0594a8">
+                        <ImageButton x:Name="editBtn"
                                  Source="EditBTNNoText.png"
                                  HeightRequest="50"
                                  BackgroundColor="Transparent"/>
-                        </StackLayout>
-                    </Frame>
-                </Grid>
-            </StackLayout>
-    </StackLayout>
+                    </StackLayout>
+                </Frame>
+            </Grid>
+        </StackLayout>
     </Grid>
 </ContentPage>

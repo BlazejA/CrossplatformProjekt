@@ -3,11 +3,11 @@ using SQLite;
 
 namespace BudgetManager
 {
-    class Wydatek
+    class Przychod
     {
         [PrimaryKey, AutoIncrement]
         public int id { get; set; }
-        
+
         [NotNull]
         public double kwota { get; set; }
 
@@ -19,16 +19,16 @@ namespace BudgetManager
         [NotNull]
         public DateTime data { get; set; }
 
-        public Wydatek()
+        public Przychod()
         {
         }
-        public Wydatek(double kwota, string kategoria, string opis, DateTime data)
+        public Przychod(double kwota, string kategoria, string opis, DateTime data)
         {
             this.kwota = kwota;
             this.kategoria = kategoria;
             this.opis = opis;
             this.data = data;
-            
+
         }
     }
 }
