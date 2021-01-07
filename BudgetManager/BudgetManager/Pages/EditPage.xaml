@@ -10,12 +10,36 @@
                 <magic:GradientStop Color="#098199" Offset="0"/>
             </magic:LinearGradient>
         </magic:GradientView>
+        
         <StackLayout>
-            <StackLayout>
-                <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <StackLayout Margin="50">
+                <Label Text="Dodaj kategorię:"
+                       VerticalOptions="CenterAndExpand" 
+                       HorizontalOptions="StartAndExpand"/>
+                <Entry x:Name="addCategoryEntry"
+                       Placeholder="Wpisz kategorię"
+                       Completed="addCategory_Completed"
+                       />
+                <Label Text=""   
+                       x:Name="successLabel"
+                       VerticalOptions="CenterAndExpand" 
+                       HorizontalOptions="StartAndExpand"
+                       FontSize="Micro"
+                       TextColor="LightGray"/>
             </StackLayout>
+
+            <StackLayout>
+                <ListView x:Name="categoriesListview">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Label Text=""/>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>            
+            
             <StackLayout VerticalOptions="EndAndExpand">
                 <Grid>
                     <Grid.ColumnDefinitions>

@@ -18,14 +18,9 @@
                    Keyboard="Numeric"
                    ClearButtonVisibility="WhileEditing"/>
             <Label HorizontalTextAlignment="Start">Kategoria:</Label>
-            <Picker x:Name="pickCategory"
+                <Picker x:Name="pickCategory"
                     Title="Wybierz kategorię">
-                <Picker.Items>                    
-                    <x:String>Hobby</x:String>
-                    <x:String>Jedzenie</x:String>
-                    <x:String>Inne</x:String>
-                </Picker.Items>
-            </Picker>
+                </Picker>
             <Label HorizontalTextAlignment="Start">Data:</Label>
             <DatePicker x:Name="datePicker"/>
             <Label HorizontalTextAlignment="Start">Opis:</Label>
@@ -64,6 +59,8 @@
                    HorizontalTextAlignment="Center"
                    FontSize="Large"
                    TextColor="Gray"/>
+        
+        
             <StackLayout VerticalOptions="EndAndExpand">
              <Grid>
                 <Grid.ColumnDefinitions>

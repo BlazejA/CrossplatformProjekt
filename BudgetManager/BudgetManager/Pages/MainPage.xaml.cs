@@ -29,12 +29,12 @@ namespace BudgetManager
             expenseList.Clear();
             incomeList.Clear();
             var table = dataBase.Table<Wydatek>();
-            foreach (Wydatek r in table)
+            foreach (Wydatek w in table)
             {
-                if (r.rodzaj == "WYDATEK")
-                    expenseList.Add(r);
+                if (w.rodzaj == "WYDATEK")
+                    expenseList.Add(w);
                 else
-                    incomeList.Add(r);
+                    incomeList.Add(w);
             }
         }
         private void showBudget()

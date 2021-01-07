@@ -1,6 +1,7 @@
 ﻿using SQLite;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 
@@ -12,11 +13,29 @@ namespace BudgetManager.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class addPage : ContentPage
     {
+        SQLiteConnection dataBase = new SQLiteConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                                                         "Wydatek.cs"));
+        SQLiteConnection categoriesBase = new SQLiteConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                                                         "Category.cs"));
 
-        SQLiteConnection dataBase = new SQLiteConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Wydatek.cs"));
+
         public addPage()
         {
             InitializeComponent();
+            
+            pickCategory.ItemsSource = categoriesList();            
+        }
+
+        private List<string> categoriesList()
+        {
+            categoriesBase.CreateTable<Category>();
+            List<string> list = new List<string>();
+            var table = dataBase.Table<Category>();
+            foreach (Category c in table)
+            {
+                list.Add(c.category);
+            }
+            return list;
         }
         private async void mainPageBtn_Clicked(object sender, EventArgs e)
         {
@@ -31,7 +50,6 @@ namespace BudgetManager.Pages
 
         private void wydatekBtn_Clicked(object sender, EventArgs e)
         {
-            dataBase.DropTable<Wydatek>();
             dataBase.CreateTable<Wydatek>();
             if (checkIfDataIsCorrect(moneyAmountEntry.Text, pickCategory.SelectedItem))
             {
