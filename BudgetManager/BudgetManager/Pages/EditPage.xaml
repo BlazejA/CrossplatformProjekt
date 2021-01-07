@@ -11,15 +11,14 @@
             </magic:LinearGradient>
         </magic:GradientView>
         
-        <StackLayout>
-            <StackLayout Margin="50">
+    <StackLayout>
+         <StackLayout Margin="50">
                 <Label Text="Dodaj kategorię:"
                        VerticalOptions="CenterAndExpand" 
                        HorizontalOptions="StartAndExpand"/>
                 <Entry x:Name="addCategoryEntry"
                        Placeholder="Wpisz kategorię"
-                       Completed="addCategory_Completed"
-                       />
+                       Completed="addCategory_Completed"/>
                 <Label Text=""   
                        x:Name="successLabel"
                        VerticalOptions="CenterAndExpand" 
@@ -27,20 +26,21 @@
                        FontSize="Micro"
                        TextColor="LightGray"/>
             </StackLayout>
-
-            <StackLayout>
-                <ListView x:Name="categoriesListview">
+         <StackLayout Margin="50,0,50,0">
+                <ListView x:Name="categoriesListview"
+                          RowHeight="30"
+                          ItemSelected="categoriesListview_ItemSelected"
+                          SeparatorColor="White">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
-                                <Label Text=""/>
+                                <Label Text="{Binding category}"/>
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-            </StackLayout>            
-            
-            <StackLayout VerticalOptions="EndAndExpand">
+            </StackLayout>                        
+         <StackLayout VerticalOptions="EndAndExpand">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -73,6 +73,6 @@
                     </Frame>
                 </Grid>
             </StackLayout>
-        </StackLayout>
+    </StackLayout>
     </Grid>
 </ContentPage>

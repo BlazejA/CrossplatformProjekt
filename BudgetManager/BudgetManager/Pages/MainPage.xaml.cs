@@ -46,22 +46,16 @@ namespace BudgetManager
                 incomeListView.ItemsSource = incomeList;
             sumMoney();
         }
-        private void deleteBtn_Clicked(object sender, EventArgs e)
-        {
-            ImageButton button = (ImageButton)sender;
-            string id = button.ClassId;
-            dataBase.Delete<Wydatek>(id);
-            showBudget();
-        }
         private void sumMoney()
         {
-            double sum =0;
-            if (expenseLayout.IsVisible) {
-                for(int i = 0; i < expenseList.Count; i++)
+            double sum = 0;
+            if (expenseLayout.IsVisible)
+            {
+                for (int i = 0; i < expenseList.Count; i++)
                 {
                     sum += expenseList[i].kwota;
                 }
-                summaryLabel.Text ="Twoje wydatki: " + sum.ToString() + "PLN";
+                summaryLabel.Text = "Twoje wydatki: " + sum.ToString() + "PLN";
                 summaryLabel.TextColor = Color.FromHex("#993300");
             }
             else
@@ -74,6 +68,14 @@ namespace BudgetManager
                 summaryLabel.TextColor = Color.FromHex("#006600");
             }
         }
+        private void deleteBtn_Clicked(object sender, EventArgs e)
+        {
+            ImageButton button = (ImageButton)sender;
+            string id = button.ClassId;
+            dataBase.Delete<Wydatek>(id);
+            showBudget();
+        }
+        
 
         //Nawigacja
         private void expenseBtn_Clicked(object sender, EventArgs e)

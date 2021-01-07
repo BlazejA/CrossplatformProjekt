@@ -11,6 +11,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Categories.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="addBTN.png" />
     <None Remove="homeBTN.png" />
   </ItemGroup>

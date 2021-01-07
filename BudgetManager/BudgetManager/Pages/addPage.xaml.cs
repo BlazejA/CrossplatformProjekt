@@ -30,10 +30,14 @@ namespace BudgetManager.Pages
         {
             categoriesBase.CreateTable<Category>();
             List<string> list = new List<string>();
-            var table = dataBase.Table<Category>();
+            var table = categoriesBase.Table<Category>();
             foreach (Category c in table)
             {
                 list.Add(c.category);
+            }
+            if (list.Count == 0)
+            {
+                pickCategory.Title = "Brak dodanych kategorii!";
             }
             return list;
         }
