@@ -16,6 +16,10 @@ namespace BudgetManager.Pages
     {
         SQLiteConnection categoriesBase = new SQLiteConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
                                                          "Category.cs"));
+        SQLiteConnection wydatekBase = new SQLiteConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                                                                        "Wydatek.cs"));
+        SQLiteConnection przychodBase = new SQLiteConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                                                                         "Przychod.cs"));
         public EditPage()
         {
             InitializeComponent();
@@ -35,7 +39,7 @@ namespace BudgetManager.Pages
             {
                 categoriesBase.Insert(cat);
                 successLabel.Text = "Dodano kategorię: " + newCategory;
-                showCategories();
+                categoriesListview.ItemsSource = categoriesBase.Table<Category>().ToList();
             }
         }
 
@@ -49,6 +53,10 @@ namespace BudgetManager.Pages
                 showCategories();
             }
         }
+
+        
+                 public string wydatkiSum { get; }  = "HALO";
+        
 
         private async void mainPageBtn_Clicked(object sender, EventArgs e)
         {

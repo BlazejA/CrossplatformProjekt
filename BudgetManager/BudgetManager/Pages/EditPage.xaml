@@ -12,7 +12,7 @@
         </magic:GradientView>
 
         <StackLayout>
-            <StackLayout Margin="30,0,30,0">
+            <StackLayout Margin="30,30,30,0">
                 <Label Text="Dodaj kategorię:"
                        VerticalOptions="CenterAndExpand" 
                        HorizontalOptions="StartAndExpand"/>
@@ -24,12 +24,12 @@
                        VerticalOptions="CenterAndExpand" 
                        HorizontalOptions="StartAndExpand"
                        FontSize="Micro"
-                       TextColor="LightGray"/>                
+                       TextColor="LightGray"/>
             </StackLayout>
 
             <StackLayout Margin="30,0,30,0"                      
                          VerticalOptions="StartAndExpand"
-                         Grid.Row="1">
+                         >
                 <Label Text="Lista kategorii"
                        TextColor="LightGray"
                        FontSize="Small"/>
@@ -45,10 +45,11 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-            </StackLayout> 
-        </StackLayout>h
-        
-     <StackLayout VerticalOptions="EndAndExpand">
+            </StackLayout>
+
+        </StackLayout>
+
+        <StackLayout VerticalOptions="EndAndExpand">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>

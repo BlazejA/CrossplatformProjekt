@@ -22,12 +22,12 @@ namespace BudgetManager
                                                                          "Przychod.cs"));
         public MainPage()
         {
-            InitializeComponent();            
+            InitializeComponent();
             incomeLayout.IsVisible = false;
             przychodBase.CreateTable<Przychod>();
             wydatekBase.CreateTable<Wydatek>();
             showBudget();
-            
+
         }
 
         private void separateObjects()
@@ -35,7 +35,7 @@ namespace BudgetManager
             expenseList.Clear();
             incomeList.Clear();
             var expenseTable = wydatekBase.Table<Wydatek>();
-            foreach (Wydatek w in expenseTable)            
+            foreach (Wydatek w in expenseTable)
                 expenseList.Add(w);
 
             var incomeTable = przychodBase.Table<Przychod>();
@@ -44,7 +44,7 @@ namespace BudgetManager
         }
         private void showBudget()
         {
-            if (expenseLayout.IsVisible) 
+            if (expenseLayout.IsVisible)
                 expenseListView.ItemsSource = wydatekBase.Table<Wydatek>().ToList();
             else
                 incomeListView.ItemsSource = przychodBase.Table<Przychod>().ToList();
@@ -57,8 +57,7 @@ namespace BudgetManager
             {
                 sum += expenseList[i].kwota;
             }
-            summaryLabel.Text = "Twoje wydatki: " + sum.ToString() + "PLN";
-            summaryLabel.TextColor = Color.FromHex("#993300");
+
             return sum;
         }
         private double sumIncome()
@@ -68,23 +67,26 @@ namespace BudgetManager
             {
                 sum += incomeList[i].kwota;
             }
-            summaryLabel.Text = "Twoje przychody: " + sum.ToString() + "PLN";
-            summaryLabel.TextColor = Color.FromHex("#006600");
+
             return sum;
         }
         private void sumMoney()
         {
-            separateObjects();            
+            separateObjects();
             if (expenseLayout.IsVisible)
             {
-                sumExpense();
+                summaryLabel.Text = "Twoje wydatki: " + sumExpense().ToString() + "PLN";
+                summaryLabel.TextColor = Color.FromHex("#993300");
+
+
             }
             else
             {
-                sumIncome();
+                summaryLabel.Text = "Twoje przychody: " + sumIncome().ToString() + "PLN";
+                summaryLabel.TextColor = Color.FromHex("#006600");
             }
-            double bilans = sumExpense() - sumIncome();
-            bilansLabel.Text = "Bilans: " + bilans;
+            double bilans = sumIncome() - sumExpense();
+            bilansLabel.Text = "Bilans: " + bilans + "PLN";
         }
         private void deleteBtn_Clicked(object sender, EventArgs e)
         {
@@ -96,7 +98,7 @@ namespace BudgetManager
                 przychodBase.Delete<Przychod>(id);
             showBudget();
         }
-        
+
 
         //Nawigacja
         private void expenseBtn_Clicked(object sender, EventArgs e)
@@ -112,7 +114,7 @@ namespace BudgetManager
             expenseLayout.IsVisible = false;
             showBudget();
         }
-       
+
         private async void addBtn_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushModalAsync(new Pages.addPage());
@@ -122,5 +124,73 @@ namespace BudgetManager
         {
             await Navigation.PushModalAsync(new Pages.EditPage());
         }
+
+        private void filterPicker_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+            if (expenseLayout.IsVisible)
+            {
+                expenseListView.ItemsSource = null;
+                expenseList.Clear();
+                foreach (var x in wydatekBase.Table<Wydatek>().ToList())
+                {
+                    if (filterPicker.SelectedIndex == 0)
+                    {
+                        if (x.data == DateTime.Now.Date)
+                            expenseList.Add(x);
+                    }
+                    else if (filterPicker.SelectedIndex == 1)
+                    {
+                        if (x.data.Date == DateTime.Now.AddDays(-1).Date)                        
+                            expenseList.Add(x);
+                    }
+                    else if (filterPicker.SelectedIndex == 2)
+                    {
+                        if (x.data.Date >= DateTime.Now.AddDays(-7).Date && DateTime.Compare(x.data.Date,DateTime.Now.Date.AddDays(1))<0)
+                            expenseList.Add(x);
+                    }
+                    else if (filterPicker.SelectedIndex == 3)
+                    {
+                        if (x.data.Date >= DateTime.Now.AddDays(-30).Date && DateTime.Compare(x.data.Date, DateTime.Now.Date.AddDays(1)) < 0)
+                            expenseList.Add(x);
+                    }
+                    else
+                        showBudget();
+                }
+                expenseListView.ItemsSource = expenseList;
+            }
+            else
+            {
+                incomeListView.ItemsSource = null;
+                incomeList.Clear();
+                foreach (var x in przychodBase.Table<Przychod>().ToList())
+                {
+                    if (filterPicker.SelectedIndex == 0)
+                    {
+                        if (x.data == DateTime.Now.Date)
+                            incomeList.Add(x);
+                    }
+                    else if (filterPicker.SelectedIndex == 1)
+                    {
+                        if (x.data.Date == DateTime.Now.AddDays(-1).Date)
+                            incomeList.Add(x);
+                    }
+                    else if (filterPicker.SelectedIndex == 2)
+                    {
+                        if (x.data.Date >= DateTime.Now.AddDays(-7).Date && DateTime.Compare(x.data.Date, DateTime.Now.Date.AddDays(1)) < 0)
+                            incomeList.Add(x);
+                    }
+                    else if (filterPicker.SelectedIndex == 3)
+                    {
+                        if (x.data.Date >= DateTime.Now.AddDays(-30).Date && DateTime.Compare(x.data.Date, DateTime.Now.Date.AddDays(1)) < 0)
+                            incomeList.Add(x);
+                    }
+                    else
+                        showBudget();
+                }
+                incomeListView.ItemsSource = incomeList;
+            }
+        }
     }
 }
+

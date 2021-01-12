@@ -27,7 +27,7 @@ namespace BudgetManager
             this.kwota = kwota;
             this.kategoria = kategoria;
             this.opis = opis;
-            this.data = data;
+            this.data = data.Date;
             
         }
     }

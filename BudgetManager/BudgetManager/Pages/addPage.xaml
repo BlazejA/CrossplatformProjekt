@@ -23,7 +23,9 @@
                     Title="Wybierz kategorię">
                 </Picker>
             <Label HorizontalTextAlignment="Start">Data:</Label>
-            <DatePicker x:Name="datePicker"/>
+                <DatePicker x:Name="datePicker">
+                    <DatePicker.Format>dd-MM-yyyy</DatePicker.Format>
+                </DatePicker>
             <Label HorizontalTextAlignment="Start">Opis:</Label>
             <Entry x:Name="descriptionEntry"
                    Placeholder="Wpisz opis"
